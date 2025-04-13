@@ -5,13 +5,12 @@ import Empty from "./Empty";
 const StyledTasksList = styled.ul`
   display: grid;
   column-gap: 20px;
-  gap: 24px;
-
+  gap: 8px;
   font-size: 20px;
 
-  padding: 16px;
-  background-color: var(--bg-secondary);
-  border-radius: var(--border-radius-sm);
+  @media only screen and (max-width: 768px) {
+    gap: 4px;
+  }
 `;
 
 function TasksList({ tasks, onRemoveTask, onDoneTask }) {

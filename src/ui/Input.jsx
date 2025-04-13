@@ -5,6 +5,10 @@ import { useState } from "react";
 const StyledInputBox = styled.form`
   display: flex;
   gap: 8px;
+
+  @media only screen and (max-width: 768px) {
+    height: 48px;
+  }
 `;
 
 const StyledInput = styled.input`

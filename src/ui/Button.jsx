@@ -1,8 +1,6 @@
 import styled from "styled-components";
 
 const StyledButton = styled.button`
-  /* Change here to sizes if neccessary */
-
   background-color: var(--color-green);
   color: var(--color-primary);
   border-radius: var(--border-radius-sm);

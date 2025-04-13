@@ -96,3 +96,20 @@ img {
   /* For dark mode */
   filter: grayscale(var(--image-grayscale)) opacity(var(--image-opacity));
 }
+
+@keyframes custom-swing-out {
+  0% {
+    transform: rotateX(0deg);
+    transform-origin: top;
+    opacity: 1;
+  }
+  100% {
+    transform: rotateX(-100deg);
+    transform-origin: top;
+    opacity: 0;
+  }
+}
+
+.remove {
+  animation: custom-swing-out 1s cubic-bezier(0.6, -0.28, 0.735, 0.045) both;
+}

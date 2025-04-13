@@ -16,6 +16,10 @@ const Main = styled.main`
   padding: 40px;
   color: var(--color-primary);
   background-color: var(--bg-primary);
+
+  @media only screen and (max-width: 768px) {
+    padding: 40px 10px;
+  }
 `;
 
 const Container = styled.div`

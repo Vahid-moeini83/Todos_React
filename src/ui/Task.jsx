@@ -2,11 +2,33 @@ import styled, { css } from "styled-components";
 import { HiTrash } from "react-icons/hi2";
 import { HiBadgeCheck } from "react-icons/hi";
 import ButtonIcon from "./ButtonIcon";
+import { useState } from "react";
 
 const StyledTask = styled.li`
+  @keyframes custom-swing {
+    0% {
+      transform: rotateX(-100deg);
+      transform-origin: top;
+      opacity: 0;
+    }
+    100% {
+      transform: rotateX(0deg);
+      transform-origin: top;
+      opacity: 1;
+    }
+  }
+
   display: grid;
-  grid-template-columns: 1.5fr 1.2fr 0.4fr;
-  padding: 8px;
+  grid-template-columns: 1.6fr 1fr 0.4fr;
+  border-radius: var(--border-radius-sm);
+  padding: 16px;
+  transition: all 0.4s;
+  animation: custom-swing 1s cubic-bezier(0.175, 0.885, 0.32, 1.275) both;
+
+  @media only screen and (max-width: 768px) {
+    padding: 12px;
+    font-size: 16px;
+  }
 `;
 
 const Status = styled.span`
@@ -31,9 +53,25 @@ const Div = styled.div`
 
 function Task({ task, onRemoveTask, onDoneTask }) {
   const { id, task: taskTopic, status } = task;
+  const [isDone, setIsDone] = useState(false);
+
+  function handleRemoveTaks(id) {
+    onRemoveTask(id);
+  }
+
+  function handleDoneTask(id) {
+    setIsDone(true);
+    onDoneTask(id);
+  }
 
   return (
-    <StyledTask>
+    <StyledTask
+      style={
+        isDone
+          ? { border: "2px solid var(--color-green-done)" }
+          : { border: "2px solid var(--color-primary)" }
+      }
+    >
       <span>{taskTopic}</span>
       <span>
         {status ? (
@@ -43,11 +81,11 @@ function Task({ task, onRemoveTask, onDoneTask }) {
         )}
       </span>
       <Div>
-        <ButtonIcon onClick={() => onRemoveTask(id)} type="delete">
+        <ButtonIcon onClick={() => handleRemoveTaks(id)} type="delete">
           <HiTrash />
         </ButtonIcon>
         {!status && (
-          <ButtonIcon onClick={() => onDoneTask(id)} type="check">
+          <ButtonIcon onClick={() => handleDoneTask(id)} type="check">
             <HiBadgeCheck />
           </ButtonIcon>
         )}
